@@ -75,5 +75,5 @@ def show_camera():
 
 if __name__ == "__main__":
     if sys.argv[1]:
-        blocksize = sys.argv[1]
+        blocksize = int(sys.argv[1])
     show_camera()
