@@ -1,8 +1,11 @@
 import cv2
 import numpy as np
 
-SIZEX = 1280
-SIZEY = 720
+CAPSIZEX = 1280
+CAPSIZEY = 720
+
+DSPSIZEX = 480
+DSPSIZEY = 320
 
 # from PIL import Image
 # from PIL import ImageEnhance
@@ -15,7 +18,7 @@ def threshold(img, step=20):
     # pixels = list(img.getdata())
     # arr    = np.array(pixels)
     arr = img.copy()
-    arr2d = arr.reshape((SIZEX, SIZEY))
+    arr2d = arr.reshape((DSPSIZEX, DSPSIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
 
@@ -32,10 +35,10 @@ def threshold(img, step=20):
 
 
 def gstreamer_pipeline(
-    capture_width = SIZEX,
-    capture_height = SIZEY,
-    display_width = 480,
-    display_height = 320,
+    capture_width = CAPSIZEX,
+    capture_height = CAPSIZEY,
+    display_width = DSPSIZEX,
+    display_height = DSPSIZEY,
     framerate = 30,
     flip_method = 0,
 ):
