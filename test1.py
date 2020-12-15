@@ -1,16 +1,37 @@
-# ITMO University
-# Mobile Computer Vision course
-# 2020
-# by Aleksei Denisov
-# denisov@itmo.ru
-
 import cv2
 import numpy as np
 
-# gstreamer_pipeline returns a GStreamer pipeline for capturing from the CSI camera
-# Defaults to 1280x720 @ 60fps
-# Flip the image by setting the flip_method (most common values: 0 and 2)
-# display_width and display_height determine the size of the window on the screen
+from PIL import Image
+from PIL import ImageEnhance
+
+
+def threshold(filename, step=20):
+    img    = Image.open(filename).convert("L")
+    img = ImageEnhance.Contrast(img).enhance(1.2)
+    pixels = list(img.getdata())
+    arr    = np.array(pixels)
+    arr2d  = arr.reshape(img.size)
+
+    blocks = np.reshape(arr2d, (-1, step, step))
+    for block in blocks:
+        factor = 1.2 # CHANGE DEPENDING ON RESULT -> Need algorithm
+        mean   = np.mean(block)
+        thresh = mean/factor
+
+        block[block <= thresh] = 0
+        block[block > thresh] = 1
+
+    arr2d = np.reshape(blocks, (1, -1))
+
+    img2  = Image.new("1", img.size)
+    img2.putdata(arr2d[0].tolist())
+    img2.save("test.jpg")
+    img2.show()
+
+
+
+    return img2
+
 
 
 def gstreamer_pipeline(
@@ -53,6 +74,8 @@ def show_camera():
         ret_val, frame = cap.read()
 
         invert = ~frame
+
+        print(frame)
 
         # Show video
         cv2.imshow('Original', frame)
