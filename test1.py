@@ -10,7 +10,7 @@ DSPSIZEY = 320
 
 blocksize = 11
 
-switched = False
+flag = 0
 
 
 def gstreamer_pipeline(
@@ -60,7 +60,7 @@ def show_camera():
         binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
 
         # Show video
-        if switched:
+        if flag == 1:
             cv2.imshow('Binary', binary)
         else:
             cv2.imshow('Original', frame)
@@ -80,7 +80,6 @@ def show_camera():
 
 
 if __name__ == "__main__":
-    switched = False
     if sys.argv[1]:
         blocksize = int(sys.argv[1])
     show_camera()
