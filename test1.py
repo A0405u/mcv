@@ -50,7 +50,7 @@ def show_camera():
 
         #binary = threshold(frame)
 
-        binary = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+        binary = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 20, 2)
 
         # Show video
         cv2.imshow('Original', frame)
