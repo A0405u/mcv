@@ -62,7 +62,7 @@ def show_camera():
         # Show video
         if switched:
             cv2.imshow('Binary', binary)
-        else
+        else:
             cv2.imshow('Original', frame)
 
         # This also acts as
