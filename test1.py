@@ -74,7 +74,7 @@ def show_camera():
         ret_val, frame = cap.read()
 
         file = open("test.txt", "w")
-        file.write(frame)
+        file.write("%s" % frame)
         file.close()
         break
 
