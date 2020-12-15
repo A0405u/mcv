@@ -83,7 +83,7 @@ def show_camera():
 
         ret_val, frame = cap.read()
 
-        binary = threshold(frame)
+        # binary = threshold(frame)
 
         # Show video
         cv2.imshow('Original', frame)
