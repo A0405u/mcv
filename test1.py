@@ -38,9 +38,9 @@ def threshold(img, step=20):
 
     arr2d = np.reshape(blocks, (1, -1))
 
-    for line in arr2d:
-        for pixel in line:
-            pixel = np.array(pixel)
+    # for line in arr2d:
+    #     for pixel in line:
+    #         pixel = np.array(pixel)
 
 
 
