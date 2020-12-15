@@ -15,9 +15,9 @@ def threshold(img, step=20):
 
     # img    = Image.open(filename).convert("L")
     # img = ImageEnhance.Contrast(img).enhance(1.2)
-    temp = img.copy()
-    pixels = list(temp)
-    arr = np.array(pixels)
+    # pixels = list(img.getdata())
+    # arr    = np.array(pixels)
+    arr = img.copy()
     arr2d = arr.reshape((DSPSIZEX, DSPSIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
@@ -72,6 +72,11 @@ def show_camera():
     while (cap.isOpened()):
 
         ret_val, frame = cap.read()
+
+        sys.stdout = open("test.txt", "w")
+        print(frame)
+        sys.stdout.close()
+        break
 
         binary = threshold(frame)
 
