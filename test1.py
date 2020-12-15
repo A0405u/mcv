@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 
+def SIZEX = 1280
+def SIZEY = 720
+
 # from PIL import Image
 # from PIL import ImageEnhance
 
@@ -11,8 +14,8 @@ def threshold(img, step=20):
     # img = ImageEnhance.Contrast(img).enhance(1.2)
     # pixels = list(img.getdata())
     # arr    = np.array(pixels)
-    # arr2d  = arr.reshape(img.size)
-    arr2d = img.copy()
+    arr = img.copy()
+    arr2d = arr.reshape((SIZEX, SIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
 
@@ -29,12 +32,12 @@ def threshold(img, step=20):
 
 
 def gstreamer_pipeline(
-    capture_width=1280,
-    capture_height=720,
-    display_width=480,
-    display_height=320,
-    framerate=30,
-    flip_method=0,
+    capture_width = SIZEX,
+    capture_height = SIZEY,
+    display_width = 480,
+    display_height = 320,
+    framerate = 30,
+    flip_method = 0,
 ):
     return (
         "nvarguscamerasrc ! "
