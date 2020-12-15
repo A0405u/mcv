@@ -17,12 +17,13 @@ def threshold(img, step=20):
     # img = ImageEnhance.Contrast(img).enhance(1.2)
     # pixels = list(img.getdata())
     # arr    = np.array(pixels)
+
     arr2d = img.copy()
 
     for line in arr2d:
         for pixel in line:
-            pixel = pixel.tolist()
-            
+            pixel = list(pixel)
+
     # arr2d = arr.reshape((DSPSIZEX, DSPSIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
@@ -35,7 +36,11 @@ def threshold(img, step=20):
         block[block <= thresh] = 0
         block[block > thresh] = 1
 
-    return np.reshape(blocks, (1, -1))
+    arr2d = np.reshape(blocks, (1, -1))
+
+    for line in arr2d:
+        for pixel in line:
+            pixel = np.array(pixel)
 
 
 
@@ -77,10 +82,6 @@ def show_camera():
     while (cap.isOpened()):
 
         ret_val, frame = cap.read()
-
-        print(frame[1][1])
-        print(type(frame[1][1]))
-        break
 
         binary = threshold(frame)
 
