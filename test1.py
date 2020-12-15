@@ -69,6 +69,7 @@ def show_camera():
 
         if keyCode == 36:
             flag = -flag
+            print(flag)
 
         # Stop the program on the ESC key
         if keyCode == 27:
