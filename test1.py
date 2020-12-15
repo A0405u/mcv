@@ -60,9 +60,9 @@ def show_camera():
 
         # Show video
         if flag > 0:
-            cv2.imshow('Original', frame)
+            cv2.imshow('Cam', frame)
         else:
-            cv2.imshow('Binary', binary)
+            cv2.imshow('Cam', binary)
 
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
