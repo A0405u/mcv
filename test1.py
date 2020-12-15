@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import sys
+import time 
 
 CAPSIZEX = 1280
 CAPSIZEY = 720
@@ -43,6 +44,9 @@ def show_camera():
     # Флаг для отображения оригинального или преобразованного изображения
     flag = 1
 
+    prev_frame_time = 0
+    new_frame_time = 0
+
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
 
@@ -53,6 +57,13 @@ def show_camera():
     while (cap.isOpened()):
 
         ret_val, frame = cap.read()
+
+        prev_frame_time = new_frame_time
+        new_frame_time = time.time()
+
+        fps = str(int(1/(new_frame_time - prev_frame_time)))
+
+        cv2.putText(gray, fps, (7, 70), font, 3, (255, 0, 0), 3, cv2.LINE_AA)
 
         # Show video
         if flag > 0:
