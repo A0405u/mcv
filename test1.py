@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-def SIZEX = 1280
-def SIZEY = 720
+SIZEX = 1280
+SIZEY = 720
 
 # from PIL import Image
 # from PIL import ImageEnhance
