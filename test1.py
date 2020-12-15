@@ -13,7 +13,7 @@ from PIL import ImageEnhance
 
 def threshold(frame, step=20):
 
-    img = Image.fromarray(frame, "BGR")
+    img = Image.fromarray(frame, "BGR;16")
     img = img.convert("L")
     img = ImageEnhance.Contrast(img).enhance(1.2)
     pixels = list(img.getdata())
