@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 
-from PIL import Image
-from PIL import ImageEnhance
+# from PIL import Image
+# from PIL import ImageEnhance
 
 
 # def threshold(filename, step=20):
