@@ -23,9 +23,7 @@ def threshold(arr2d, step=20):
         block[block <= thresh] = 0
         block[block > thresh] = 1
 
-    arr2d = np.reshape(blocks, (1, -1))
-
-    return arr2d
+    return np.reshape(blocks, (1, -1))
 
 
 
