@@ -15,9 +15,9 @@ def threshold(img, step=20):
 
     # img    = Image.open(filename).convert("L")
     # img = ImageEnhance.Contrast(img).enhance(1.2)
-    # pixels = list(img.getdata())
-    # arr    = np.array(pixels)
-    arr = img.copy()
+    temp = img.copy()
+    pixels = list(temp)
+    arr = np.array(pixels)
     arr2d = arr.reshape((DSPSIZEX, DSPSIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
