@@ -11,7 +11,7 @@ while(cap.isOpened()):
     ret, frame = cap.read()
     
     #Flip Video vertically (180 Degrees)
-    #frame = cv2.flip(frame, 180)
+    frame = cv2.flip(frame, 180)
 
     invert = ~frame
 
