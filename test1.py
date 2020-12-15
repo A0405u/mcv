@@ -67,7 +67,7 @@ def show_camera():
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
 
-        if keyCode == 36:
+        if keyCode == 32:
             flag = -flag
             print(flag)
 
