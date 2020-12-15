@@ -13,7 +13,7 @@ from PIL import ImageEnhance
 
 def threshold(frame, step=20):
 
-    img = Image.frombytes("RGB", (DSPSIZEX, DSPSIZEY), frame)
+    img = Image.frombytes("BRG;24", (DSPSIZEX, DSPSIZEY), frame)
     img = img.convert("L")
     img = ImageEnhance.Contrast(img).enhance(1.2)
     pixels = list(img.getdata())
@@ -59,7 +59,7 @@ def gstreamer_pipeline(
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
-        "video/x-raw, format=(string)RGB ! appsink max-buffers=1 drop=true"
+        "video/x-raw, format=(string)BRG ! appsink max-buffers=1 drop=true"
         % (
             capture_width,
             capture_height,
