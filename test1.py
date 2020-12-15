@@ -13,8 +13,8 @@ from PIL import ImageEnhance
 
 def threshold(frame, step=20):
 
-    img = Image.frombytes("RGB", (DSPSIZEX, DSPSIZEY), frame)
-    img = img.convert("L")
+    temp = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    img = Image.fromarray(temp, "RGB").convert("L")
     img = ImageEnhance.Contrast(img).enhance(1.2)
     pixels = list(img.getdata())
     arr    = np.array(pixels)
@@ -88,7 +88,7 @@ def show_camera():
         # Show video
         cv2.imshow('Original', frame)
 
-        cv2.imshow('Inverted', binary)
+        cv2.imshow('Binary', binary)
 
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
