@@ -40,7 +40,9 @@ def gstreamer_pipeline(
 
 def show_camera():
 
+    # Флаг для отображения оригинального или преобразованного изображения
     flag = 1
+
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
 
@@ -52,24 +54,20 @@ def show_camera():
 
         ret_val, frame = cap.read()
 
-        #binary = threshold(frame)
-
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
-
         # Show video
         if flag > 0:
             cv2.imshow('Cam', frame)
         else:
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
             cv2.imshow('Cam', binary)
 
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
 
+        # Изменение выводимого изображения
         if keyCode == 32:
             flag = -flag
-            print(flag)
 
         # Stop the program on the ESC key
         if keyCode == 27:
