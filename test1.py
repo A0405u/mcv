@@ -18,6 +18,11 @@ def threshold(img, step=20):
     # pixels = list(img.getdata())
     # arr    = np.array(pixels)
     arr2d = img.copy()
+
+    for line in arr2d:
+        for pixel in line:
+            pixel = pixel.tolist()
+            
     # arr2d = arr.reshape((DSPSIZEX, DSPSIZEY))
 
     blocks = np.reshape(arr2d, (-1, step, step))
