@@ -5,32 +5,27 @@ import numpy as np
 # from PIL import ImageEnhance
 
 
-# def threshold(filename, step=20):
-#     img    = Image.open(filename).convert("L")
-#     img = ImageEnhance.Contrast(img).enhance(1.2)
-#     pixels = list(img.getdata())
-#     arr    = np.array(pixels)
-#     arr2d  = arr.reshape(img.size)
+def threshold(arr2d, step=20):
 
-#     blocks = np.reshape(arr2d, (-1, step, step))
-#     for block in blocks:
-#         factor = 1.2 # CHANGE DEPENDING ON RESULT -> Need algorithm
-#         mean   = np.mean(block)
-#         thresh = mean/factor
+    # img    = Image.open(filename).convert("L")
+    # img = ImageEnhance.Contrast(img).enhance(1.2)
+    # pixels = list(img.getdata())
+    # arr    = np.array(pixels)
+    # arr2d  = arr.reshape(img.size)
 
-#         block[block <= thresh] = 0
-#         block[block > thresh] = 1
+    blocks = np.reshape(arr2d, (-1, step, step))
 
-#     arr2d = np.reshape(blocks, (1, -1))
+    for block in blocks:
+        factor = 1.2 # CHANGE DEPENDING ON RESULT -> Need algorithm
+        mean   = np.mean(block)
+        thresh = mean/factor
 
-#     img2  = Image.new("1", img.size)
-#     img2.putdata(arr2d[0].tolist())
-#     img2.save("test.jpg")
-#     img2.show()
+        block[block <= thresh] = 0
+        block[block > thresh] = 1
 
+    arr2d = np.reshape(blocks, (1, -1))
 
-
-#     return img2
+    return arr2d
 
 
 
@@ -73,13 +68,12 @@ def show_camera():
 
         ret_val, frame = cap.read()
 
-        invert = ~frame
-
-        print(frame)
+        binary = threshold(frame)
 
         # Show video
         cv2.imshow('Original', frame)
-        cv2.imshow('Inverted', invert)
+
+        cv2.imshow('Inverted', binary)
 
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
