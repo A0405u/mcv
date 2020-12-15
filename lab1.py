@@ -15,8 +15,8 @@ while(cap.isOpened()):
 
     invert = ~frame
 
-    frame = cv2.resize(frame, None, None, fx=0.25, fy=0.25)
-    invert = cv2.resize(invert, None, None, fx=0.25, fy=0.25)
+    frame = cv2.resize(frame, (480, 360))
+    invert = cv2.resize(invert, (480, 360))
 
     # Show video
     cv2.imshow('Cam', frame)
