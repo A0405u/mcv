@@ -74,7 +74,8 @@ def show_camera():
         ret_val, frame = cap.read()
 
         print(frame[1][1])
-        type(frame[1][1])
+        print(type(frame[1][1]))
+        break
 
         binary = threshold(frame)
 
