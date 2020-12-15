@@ -65,12 +65,12 @@ def show_camera():
 
         # Show video
         if flag > 0:
-            cv2.putText(frame, fps, (7, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3, cv2.LINE_AA)
+            cv2.putText(frame, fps, (7, 35), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 255), 3, cv2.LINE_AA)
             cv2.imshow('Cam', frame)
         else:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
-            cv2.putText(binary, fps, (7, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 0), 3, cv2.LINE_AA)
+            cv2.putText(binary, fps, (7, 35), cv2.FONT_HERSHEY_PLAIN, 1, (0, 0, 255), 3, cv2.LINE_AA)
             cv2.imshow('Cam', binary)
 
         # This also acts as
