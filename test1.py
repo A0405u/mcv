@@ -10,9 +10,6 @@ DSPSIZEY = 320
 
 blocksize = 11
 
-flag = 1
-
-
 def gstreamer_pipeline(
     capture_width = CAPSIZEX,
     capture_height = CAPSIZEY,
@@ -42,6 +39,8 @@ def gstreamer_pipeline(
 
 
 def show_camera():
+
+    flag = 1
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
 
