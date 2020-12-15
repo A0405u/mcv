@@ -74,7 +74,7 @@ def show_camera():
         ret_val, frame = cap.read()
 
         sys.stdout = open("test.txt", "w")
-        print(frame)
+        print("LOX")
         sys.stdout.close()
         break
 
