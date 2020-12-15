@@ -73,9 +73,9 @@ def show_camera():
 
         ret_val, frame = cap.read()
 
-        sys.stdout = open("test.txt", "w")
-        print("LOX")
-        sys.stdout.close()
+        file = open("test.txt", "w")
+        file.write(frame)
+        file.close()
         break
 
         binary = threshold(frame)
