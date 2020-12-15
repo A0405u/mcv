@@ -13,7 +13,7 @@ from PIL import ImageEnhance
 
 def threshold(frame, step=20):
 
-    img = Image.frombytes("BGR;24", (DSPSIZEX, DSPSIZEY), frame)
+    img = Image.frombytes("RGB", (DSPSIZEX, DSPSIZEY), frame)
     img = img.convert("L")
     img = ImageEnhance.Contrast(img).enhance(1.2)
     pixels = list(img.getdata())
@@ -59,7 +59,7 @@ def gstreamer_pipeline(
         "nvvidconv flip-method=%d ! "
         "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
         "videoconvert ! "
-        "video/x-raw, format=(string)BGR ! appsink max-buffers=1 drop=true"
+        "video/x-raw, format=(string)RGB ! appsink max-buffers=1 drop=true"
         % (
             capture_width,
             capture_height,
@@ -75,8 +75,8 @@ def show_camera():
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
 
-    cap = cv2.VideoCapture(0)
-    # cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=4), cv2.CAP_GSTREAMER)
+    # cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=4), cv2.CAP_GSTREAMER)
 
     # Window
     while (cap.isOpened()):
