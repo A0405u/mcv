@@ -52,7 +52,7 @@ def show_camera():
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 20, 2)
+        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
         # Show video
         cv2.imshow('Original', frame)
