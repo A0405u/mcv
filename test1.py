@@ -1,11 +1,14 @@
 import cv2
 import numpy as np
+import sys
 
 CAPSIZEX = 1280
 CAPSIZEY = 720
 
 DSPSIZEX = 480
 DSPSIZEY = 320
+
+blocksize = 11
 
 
 def gstreamer_pipeline(
@@ -52,7 +55,7 @@ def show_camera():
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
+        binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
 
         # Show video
         cv2.imshow('Original', frame)
@@ -71,4 +74,6 @@ def show_camera():
 
 
 if __name__ == "__main__":
+    if sys.argv[1]:
+        blocksize = sys.argv[1]
     show_camera()
