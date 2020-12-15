@@ -10,6 +10,8 @@ DSPSIZEY = 320
 
 blocksize = 11
 
+switched = False
+
 
 def gstreamer_pipeline(
     capture_width = CAPSIZEX,
@@ -58,12 +60,16 @@ def show_camera():
         binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
 
         # Show video
-        cv2.imshow('Original', frame)
-
-        cv2.imshow('Binary', binary)
+        if switched:
+            cv2.imshow('Binary', binary)
+        else
+            cv2.imshow('Original', frame)
 
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
+
+        if keyCode == 36:
+            switched = ~switched
 
         # Stop the program on the ESC key
         if keyCode == 27:
