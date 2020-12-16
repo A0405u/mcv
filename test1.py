@@ -70,7 +70,7 @@ def show_camera():
 
         current_frame_time = new_frame_time - prev_frame_time
         frame_counter = frame_counter + 1
-        fps_timer = fps_time + current_frame_time
+        fps_timer = fps_timer + current_frame_time
 
         if frame_counter == 30:
             fps = int(1 / (fps_timer / 30))
