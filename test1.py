@@ -78,8 +78,13 @@ def show_camera():
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
 
+        # Скриншот изображения
         if keyCode == 201:
-            screenshot_name = 'Screenshot' + str(time.time()) + '.png'
+            if flag < 0:
+                screenshot_name = "Binarized_" + str(blocksize) + "BS_"
+            else:
+                screenshot_name = "Original_"
+            screenshot_name = screenshot_name + str(time.time()) + '.png'
             cv2.imwrite(screenshot_name, frame)
             print("Image saved as: " + screenshot_name)
 
