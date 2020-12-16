@@ -54,6 +54,8 @@ def show_camera():
     fps_timer = 0
     frame_counter = 0
 
+    fps = 0
+
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
 
