@@ -85,8 +85,8 @@ def show_camera():
             frame = cv2.adaptiveThreshold(frame, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, blocksize, 2)
 
         # Write fps
-        cv2.putText(frame, fps, (7, 35), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 9, cv2.LINE_AA)
-        cv2.putText(frame, fps, (7, 35), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0), 3, cv2.LINE_AA)
+        cv2.putText(frame, str(fps), (7, 35), cv2.FONT_HERSHEY_PLAIN, 2, (255, 255, 255), 9, cv2.LINE_AA)
+        cv2.putText(frame, str(fps), (7, 35), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0), 3, cv2.LINE_AA)
 
         # Show video
         cv2.imshow('Cam', frame)
