@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import sys
 import time 
+from time import gmtime, strftime
 
 CAPSIZEX = 1280
 CAPSIZEY = 720
@@ -80,11 +81,14 @@ def show_camera():
 
         # Скриншот изображения
         if keyCode == 201:
+
             if flag < 0:
-                screenshot_name = "Binarized_" + str(blocksize) + "BS_"
+                screenshot_name = "Binarized_"
             else:
                 screenshot_name = "Original_"
-            screenshot_name = screenshot_name + str(time.time()) + '.png'
+
+            screenshot_name = screenshot_name + str(blocksize) + "BS_" + strftime("%Y-%m-%d_%H:%M:%S", gmtime()) + '.png'
+
             cv2.imwrite(screenshot_name, frame)
             print("Image saved as: " + screenshot_name)
 
