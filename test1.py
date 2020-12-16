@@ -78,8 +78,8 @@ def show_camera():
         # This also acts as
         keyCode = cv2.waitKey(1) & 0xFF
 
-        if keyCode != 255:
-            print(keyCode)
+        if keyCode == 201:
+            cv2.imwrite('Screenshot' + time.time() + '.png', frame) 
 
         # Изменение выводимого изображения
         if keyCode == 32:
