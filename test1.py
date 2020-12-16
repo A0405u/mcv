@@ -40,13 +40,19 @@ def gstreamer_pipeline(
     )
 
 
+
 def show_camera():
+
 
     # Флаг для отображения оригинального или преобразованного изображения
     flag = 1
 
+    # Подсчет FPS
     prev_frame_time = 0
     new_frame_time = 0
+
+    fps_timer = 0
+    frame_counter = 0
 
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     print(gstreamer_pipeline(flip_method=4))
@@ -62,7 +68,14 @@ def show_camera():
         prev_frame_time = new_frame_time
         new_frame_time = time.time()
 
-        fps = str(int(1/(new_frame_time - prev_frame_time)))
+        current_frame_time = new_frame_time - prev_frame_time
+        frame_counter = frame_counter + 1
+        fps_timer = fps_time + current_frame_time
+
+        if frame_counter == 30:
+            fps = int(1 / (fps_timer / 30))
+            frame_counter = 0
+            fps_timer = 0
 
         # Применение бинаризации
         if flag < 0:
