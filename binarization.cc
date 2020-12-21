@@ -2,6 +2,7 @@
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
+#include <opencv2/imgproc.hpp>
 
 #include <iostream>
 #include <arm_neon.h>
@@ -12,16 +13,31 @@ using namespace cv;
 
 void binarize(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
 {
-	cout << "inside function binarization" << endl;
-
-	auto t1 = chrono::high_resolution_clock::now();
+	auto t1_cv = chrono::high_resolution_clock::now();
 	for(int i=0; i<num_pixels; ++i, rgb+=3) {
 
 		int v = (77*rgb[0] + 150*rgb[1] + 29*rgb[2]);
 		binarized[i] = ((v>>8) > threshold) * 255;
 	}
+	auto t2_cv = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(t2_cv-t1_cv).count();
+	cout << "inside function binarize" << endl;
+	cout << duration << " us" << endl;
+}
+
+void binarize_cv(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
+{
+	auto t1 = chrono::high_resolution_clock::now();
+	
+	Mat gray_image(height, width, CV_8UC1, Scalar(0));
+	uint8_t* gray = gray_image.data;
+
+	cvtColor(rgb, gray, COLOR_RGB2GRAY);
+	threshold(gray, binarized, threshold, 255, THRESH_BINARY);
+
 	auto t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
+	cout << "inside function binarize" << endl;
 	cout << duration << " us" << endl;
 }
 
@@ -83,6 +99,7 @@ int main(int argc,char** argv)
 {
 	uint8_t * rgb_arr;
 	uint8_t * binarized;
+	uint8_t * binarized_cv;
 	uint8_t * binarized_neon;
 
 	if (argc != 3) {
@@ -110,7 +127,6 @@ int main(int argc,char** argv)
 	int height = rgb_image.rows;
 	int num_pixels = width*height;
 
-
 	// Binarization
 	Mat binarized_image(height, width, CV_8UC1, Scalar(0));
 	binarized = binarized_image.data;
@@ -123,6 +139,19 @@ int main(int argc,char** argv)
 	cout << duration << " us" << endl;
 
 	imwrite("binarized.png", binarized_image);
+
+	// NEON binarization
+	Mat binarized_image_cv(height, width, CV_8UC1, Scalar(0));
+	binarized_cv = binarized_image_cv.data;
+
+	auto t1_cv = chrono::high_resolution_clock::now();
+	binarize_cv(rgb_arr, binarized_cv, threshold, num_pixels);
+	auto t2_cv = chrono::high_resolution_clock::now();
+	auto duration_cv = chrono::duration_cast<chrono::microseconds>(t2_cv-t1_cv).count();
+	cout << "binarize_cv" << endl;
+	cout << duration_neon << " us" << endl;
+
+	imwrite("binarized_neon.png", binarized_image_neon);
 
 	// NEON binarization
 	Mat binarized_image_neon(height, width, CV_8UC1, Scalar(0));
