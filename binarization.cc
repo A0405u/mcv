@@ -29,11 +29,8 @@ void binarize_cv(Mat rgb, uint8_t* binarized, const uint8_t threshold, int num_p
 {
 	auto t1 = chrono::high_resolution_clock::now();
 	
-	int width = rgb_image.cols;
-	int height = rgb_image.rows;
-
 	Mat gray;
-	
+
 	cvtColor(rgb, gray, COLOR_RGB2GRAY);
 	cv::threshold(gray, binarized, threshold, 255, THRESH_BINARY);
 
