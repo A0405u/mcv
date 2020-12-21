@@ -25,7 +25,7 @@ void binarize(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, i
 	cout << duration << " us" << endl;
 }
 
-void binarize_cv(Mat rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
+void binarize_cv(Mat rgb, Mat binarized, const uint8_t threshold, int num_pixels)
 {
 	auto t1 = chrono::high_resolution_clock::now();
 	
@@ -140,11 +140,10 @@ int main(int argc,char** argv)
 	imwrite("binarized.png", binarized_image);
 
 	// OpenCV binarization
-	Mat binarized_image_cv(height, width, CV_8UC1, Scalar(0));
-	binarized_cv = binarized_image_cv.data;
+	Mat binarized_image_cv;
 
 	auto t1_cv = chrono::high_resolution_clock::now();
-	binarize_cv(rgb_image, binarized_cv, threshold, num_pixels);
+	binarize_cv(rgb_image, binarized_image_cv, threshold, num_pixels);
 	auto t2_cv = chrono::high_resolution_clock::now();
 	auto duration_cv = chrono::duration_cast<chrono::microseconds>(t2_cv-t1_cv).count();
 	cout << "binarize_cv" << endl;
