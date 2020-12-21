@@ -18,7 +18,7 @@ void binarize(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, i
 	for(int i=0; i<num_pixels; ++i, rgb+=3) {
 
 		int v = (77*rgb[0] + 150*rgb[1] + 29*rgb[2]);
-		binarized[i] = (v>>8) > threshold;
+		binarized[i] = ((v>>8) > threshold) * 255;
 	}
 	auto t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
