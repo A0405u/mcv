@@ -10,7 +10,7 @@
 using namespace std;
 using namespace cv;
 
-void binarization(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
+void binarize(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
 {
 	cout << "inside function binarization" << endl;
 
@@ -82,6 +82,7 @@ void binarize_neon(const uint8_t* rgb, uint8_t* binarized, const uint8_t thresho
 int main(int argc,char** argv)
 {
 	uint8_t * rgb_arr;
+	uint8_t * binarized;
 	uint8_t * binarized_neon;
 
 	if (argc != 3) {
@@ -119,7 +120,7 @@ int main(int argc,char** argv)
 	auto t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
 	cout << "binarize" << endl;
-	cout << duration_neon << " us" << endl;
+	cout << duration << " us" << endl;
 
 	imwrite("binarized.png", binarized_image);
 
