@@ -33,7 +33,7 @@ void binarize_cv(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold
 	uint8_t* gray = gray_image.data;
 
 	cvtColor(rgb, gray, COLOR_RGB2GRAY);
-	threshold(gray, binarized, threshold, 255, THRESH_BINARY);
+	cv::threshold(gray, binarized, threshold, 255, THRESH_BINARY);
 
 	auto t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
@@ -140,7 +140,7 @@ int main(int argc,char** argv)
 
 	imwrite("binarized.png", binarized_image);
 
-	// NEON binarization
+	// OpenCV binarization
 	Mat binarized_image_cv(height, width, CV_8UC1, Scalar(0));
 	binarized_cv = binarized_image_cv.data;
 
@@ -149,9 +149,9 @@ int main(int argc,char** argv)
 	auto t2_cv = chrono::high_resolution_clock::now();
 	auto duration_cv = chrono::duration_cast<chrono::microseconds>(t2_cv-t1_cv).count();
 	cout << "binarize_cv" << endl;
-	cout << duration_neon << " us" << endl;
+	cout << duration_cv << " us" << endl;
 
-	imwrite("binarized_neon.png", binarized_image_neon);
+	imwrite("binarized_cv.png", binarized_image_cv);
 
 	// NEON binarization
 	Mat binarized_image_neon(height, width, CV_8UC1, Scalar(0));
