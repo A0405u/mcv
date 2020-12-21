@@ -55,7 +55,7 @@ void rgb_to_gray_neon(const uint8_t* rgb, uint8_t* gray, int num_pixels) {
 	cout << duration_neon << " us" << endl;
 }
 
-void binarize_neon(const uint8_t* rgb, uint8_t* binarized, int threshold, int num_pixels) {
+void binarize_neon(const uint8_t* rgb, uint8_t* binarized, uint8_t threshold, int num_pixels) {
 	
 	// We'll use 64-bit NEON registers to process 8 pixels in parallel.
 	num_pixels /= 8;
@@ -75,7 +75,7 @@ void binarize_neon(const uint8_t* rgb, uint8_t* binarized, int threshold, int nu
 	uint8x8_t threshold_vector;
 
 	// Loading threshold value into register.
-	threshold_vector = vld1_dup_u8(threshold)
+	threshold_vector = vld1_dup_u8(threshold);
 
 	// For binarized values.
 	uint8x8_t result;
