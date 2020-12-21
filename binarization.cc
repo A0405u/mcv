@@ -25,11 +25,11 @@ void binarize(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, i
 	cout << duration << " us" << endl;
 }
 
-void binarize_cv(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold, int num_pixels)
+void binarize_cv(const Mat rgb, Mat binarized, const uint8_t threshold, int num_pixels)
 {
 	auto t1 = chrono::high_resolution_clock::now();
 	
-	uint8_t* gray;
+	Mat gray(rgb.rows, rgb.cols, CV_8UC1, Scalar(0));
 
 	cvtColor(rgb, gray, COLOR_RGB2GRAY);
 	cv::threshold(gray, binarized, threshold, 255, THRESH_BINARY);
@@ -141,7 +141,6 @@ int main(int argc,char** argv)
 
 	// OpenCV binarization
 	Mat binarized_image_cv(height, width, CV_8UC1, Scalar(0));
-	binarized_cv = binarized_image_cv.data;
 
 	auto t1_cv = chrono::high_resolution_clock::now();
 	binarize_cv(rgb_image, binarized_image_cv, threshold, num_pixels);
