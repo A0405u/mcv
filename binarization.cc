@@ -31,12 +31,12 @@ void binarize_cv(const Mat rgb, Mat binarized, const uint8_t threshold, int num_
 	
 	Mat gray(rgb.rows, rgb.cols, CV_8UC1, Scalar(0));
 
-	cvtColor(rgb, gray, COLOR_RGB2GRAY);
-	cv::threshold(gray, binarized, threshold, 255, THRESH_BINARY);
+	cv::cvtColor(rgb, gray, cv::COLOR_RGB2GRAY);
+	cv::threshold(gray, binarized, threshold, 255, cv::THRESH_BINARY);
 
 	auto t2 = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::microseconds>(t2-t1).count();
-	cout << "inside function binarize" << endl;
+	cout << "inside function binarize cv" << endl;
 	cout << duration << " us" << endl;
 }
 
