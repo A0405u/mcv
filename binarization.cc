@@ -29,6 +29,9 @@ void binarize_cv(const uint8_t* rgb, uint8_t* binarized, const uint8_t threshold
 {
 	auto t1 = chrono::high_resolution_clock::now();
 	
+	int width = rgb_image.cols;
+	int height = rgb_image.rows;
+	
 	Mat gray_image(height, width, CV_8UC1, Scalar(0));
 	uint8_t* gray = gray_image.data;
 
@@ -145,7 +148,7 @@ int main(int argc,char** argv)
 	binarized_cv = binarized_image_cv.data;
 
 	auto t1_cv = chrono::high_resolution_clock::now();
-	binarize_cv(rgb_arr, binarized_cv, threshold, height, width, num_pixels);
+	binarize_cv(rgb_image, binarized_cv, threshold, num_pixels);
 	auto t2_cv = chrono::high_resolution_clock::now();
 	auto duration_cv = chrono::duration_cast<chrono::microseconds>(t2_cv-t1_cv).count();
 	cout << "binarize_cv" << endl;
