@@ -75,7 +75,7 @@ void binarize_neon(const uint8_t* rgb, uint8_t* binarized, const uint8_t thresho
 	uint8x8_t threshold_vector;
 
 	// Loading threshold value into register.
-	threshold_vector = vld1_dup_u8(threshold);
+	threshold_vector = vld1_dup_u8(&threshold);
 
 	// For binarized values.
 	uint8x8_t result;
