@@ -29,7 +29,7 @@ void binarize_cv(Mat rgb, Mat binarized, const uint8_t threshold, int num_pixels
 {
 	auto t1 = chrono::high_resolution_clock::now();
 	
-	Mat gray;
+	Mat gray(rgb.rows, rgb.cols, CV_8UC1, Scalar(0));
 
 	cvtColor(rgb, gray, COLOR_RGB2GRAY);
 	cv::threshold(gray, binarized, threshold, 255, THRESH_BINARY);
