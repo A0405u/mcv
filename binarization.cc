@@ -140,7 +140,8 @@ int main(int argc,char** argv)
 	imwrite("binarized.png", binarized_image);
 
 	// OpenCV binarization
-	Mat binarized_image_cv;
+	Mat binarized_image_cv(height, width, CV_8UC1, Scalar(0));
+	binarized_cv = binarized_image_cv.data;
 
 	auto t1_cv = chrono::high_resolution_clock::now();
 	binarize_cv(rgb_image, binarized_image_cv, threshold, num_pixels);
