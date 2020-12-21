@@ -114,7 +114,7 @@ int main(int argc,char** argv)
 	uint8_t * rgb_arr;
 	uint8_t * binarized_neon;
 
-	if (argc != 2) {
+	if (argc != 3) {
 		cout << "Usage: opencv_neon image_name" << endl;
 		return -1;
 	}
