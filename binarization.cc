@@ -133,7 +133,7 @@ int main(int argc,char** argv)
 		return -2;
 	}
 
-	uint8_t threshold = argv[2];
+	uint8_t threshold = stoi(argv[2]);
 
 	int width = rgb_image.cols;
 	int height = rgb_image.rows;
