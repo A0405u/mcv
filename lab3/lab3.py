@@ -37,7 +37,7 @@ def load_images(images_path):
     timest = time.time()
 
     images = []
-    
+
     paths = os.listdir(images_path)
 
     for path in paths:
@@ -59,6 +59,9 @@ def load_classes(path):
     timest = time.time()
 
     classes=[]
+
+    print(classes[0])
+    print(classes[1])
 
     with open(path, 'r') as fd:
         reader = csv.reader(fd)
