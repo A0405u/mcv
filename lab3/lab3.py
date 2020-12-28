@@ -60,7 +60,7 @@ def load_classes(path):
     classes=[]
 
     file = open(path)
-    
+
     for line in file:
         classes.append(line)
 
@@ -72,20 +72,21 @@ def load_classes(path):
 
 # Transform image
 
-test_transforms = transforms.Compose([transforms.Resize(224),
-                                      transforms.ToTensor(),
-                                     ])
+image_transforms = transforms.Compose([transforms.Resize(224), transforms.ToTensor()])
 
 
 # Predict image
 
 def predict(image, model, trt):
 
-    image_tensor = test_transforms(image).float()
+    timest = time.time()
+
+    image_tensor = image_transforms(image).float()
     image_tensor = image_tensor.unsqueeze_(0)
+
     input = Variable(image_tensor)
     input = input.to(device)
-    timest = time.time()
+
     #output = model_trt(input)
     output = model(input)
 
@@ -107,7 +108,7 @@ def process(image, model, trt):
     plt.axis('off')
     plt.imshow(image)
     plt.savefig('out/' + str(index) + '.png')
-    plt.show()
+    # plt.show()
 
 
 
@@ -130,6 +131,6 @@ if __name__ == "__main__":
 
     for i, image in enumerate(images):
 
-        print("{current} of {all}".format(current = i, all = len(images)))
+        print("processing {current} of {all}...".format(current = i + 1, all = len(images)))
 
         process(image, model, trt)
