@@ -88,7 +88,7 @@ def process(image, model, trt):
     fig = plt.figure(figsize=(10, 10))
     sub = fig.add_subplot(1,1,1)
 
-    index = predict(image)
+    index = predict(image, model, trt)
 
     sub.set_title("class " + str(classes[index]))
     plt.axis('off')
