@@ -82,7 +82,7 @@ void binarize_neon(const uint8_t* rgb, uint8_t* binarized, const uint8_t thresho
 		gray = vshrn_n_u16(temp, 8);
 		
 		// Compare pixels with threshold value.
-		result = vclt_u8(threshold_vector, gray);
+		result = vclt_u8(threshold_vector, gray); //Возвращаемый тип данных
 		
 		// Store converted pixels in the output grayscale image.
 		vst1_u8(binarized, result);
