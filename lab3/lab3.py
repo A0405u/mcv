@@ -14,9 +14,13 @@ import time
 
 def load_model():
 
+    print("loading model...")
+
     timest = time.time()
+
     model = alexnet(pretrained = True).eval().cuda()
-    print("load time {}".format(time.time() - timest))
+
+    print("model load time {}".format(time.time() - timest))
 
     return model
 
@@ -25,12 +29,18 @@ def load_model():
 
 def load_images(images_path):
 
+    print("loading images...")
+
+    timest = time.time()
+
     images = []
     paths = os.listdir(images_path)
 
     for path in paths:
         image = cv2.imread(path, cv2.IMREAD_COLOR)
         images.append(image)
+
+    print("images load time {}".format(time.time() - timest))
 
     return images
 
@@ -99,5 +109,10 @@ if __name__ == "__main__":
 
     images = load_images("img/")
 
-    for image in images:
+    print("processing images...")
+
+    for i, image in images:
+
+        print(i + " of " + len(images))
+
         process(image, model, trt)
