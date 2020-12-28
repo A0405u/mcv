@@ -36,10 +36,13 @@ def load_images(images_path):
     images = []
     paths = os.listdir(images_path)
 
+    print(paths)
+
     for path in paths:
         image = cv2.imread(path, cv2.IMREAD_COLOR)
         images.append(image)
 
+    print("found " + len(images) + "images")
     print("images load time {}".format(time.time() - timest))
 
     return images
