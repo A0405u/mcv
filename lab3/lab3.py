@@ -45,7 +45,7 @@ def load_images(images_path):
         images.append(image)
 
     print("found {} images".format(len(images)))
-    print("images loaded in {}s".format(round(time.time() - timest, 2)))
+    print("images loaded in {}s".format(round(time.time() - timest, 3)))
 
     return images
 
@@ -60,16 +60,16 @@ def load_classes(path):
 
     classes=[]
 
-    print(classes[0])
-    print(classes[1])
-
     with open(path, 'r') as fd:
         reader = csv.reader(fd)
         for row in reader:
             classes.append(row)
 
+    print("0: " + str(classes[0]))
+    print("1: " + str(classes[1]))
+
     print("found {} classes".format(len(classes)))
-    print("classes loaded in {}s".format(round(time.time() - timest, 2)))
+    print("classes loaded in {}s".format(round(time.time() - timest, 3)))
 
     return classes
 
@@ -93,7 +93,7 @@ def predict(image, model, trt):
     #output = model_trt(input)
     output = model(input)
 
-    print("processing {}".format(round(time.time() - timest, 2)))
+    print("image processed in {}s".format(round(time.time() - timest, 3)))
 
     index = output.data.cpu().numpy().argmax()
 
