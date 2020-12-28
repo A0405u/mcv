@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
     images = load_images("img/")
 
-    classes = load_classes("classes.txt")
+    classes = load_classes("classes.csv")
 
     print("processing images...")
 
