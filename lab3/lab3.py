@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
     print("processing images...")
 
-    for i, image in images:
+    for i, image in enumarate(images):
 
         print("{current} of {all}".format(current = i, all = len(images)))
 
