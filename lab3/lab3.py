@@ -12,7 +12,7 @@ import time
 
 # Create regular pytorch model
 
-def load_model()
+def load_model():
 
     timest = time.time()
     model = alexnet(pretrained = True).eval().cuda()
@@ -23,7 +23,7 @@ def load_model()
 
 # Load images
 
-def load_images(images_path)
+def load_images(images_path):
 
     images = []
     paths = os.listdir(images_path)
