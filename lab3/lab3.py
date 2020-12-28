@@ -52,7 +52,7 @@ def load_images(images_path):
 
 # Read classes
 
-def load_classes(path)
+def load_classes(path):
 
     print("loading classes...")
 
@@ -74,8 +74,6 @@ def load_classes(path)
 test_transforms = transforms.Compose([transforms.Resize(224),
                                       transforms.ToTensor(),
                                      ])
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # Predict image
@@ -120,6 +118,8 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 2:
         trt = (sys.argv[1] == "trt")
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     model = load_model()
 
