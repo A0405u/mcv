@@ -39,10 +39,10 @@ def load_images(images_path):
     print(paths)
 
     for path in paths:
-        image = cv2.imread(path, cv2.IMREAD_COLOR)
+        image = cv2.imread(images_path + path, cv2.IMREAD_COLOR)
         images.append(image)
 
-    print("found " + len(images) + "images")
+    print("found {} images".format(len(images)))
     print("images load time {}".format(time.time() - timest))
 
     return images
@@ -116,6 +116,6 @@ if __name__ == "__main__":
 
     for i, image in images:
 
-        print(i + " of " + len(images))
+        print("{current} of {all}".format(current = i, all = len(images)))
 
         process(image, model, trt)
