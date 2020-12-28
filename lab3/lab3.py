@@ -99,7 +99,7 @@ def process(image, model, trt):
     sub.set_title(index)
     plt.axis('off')
     plt.imshow(image)
-    plt.savefig('./output/'+str(index)+'.jpg')
+    plt.savefig('out/' + str(index) + '.png')
     plt.show()
 
 
