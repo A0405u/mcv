@@ -37,6 +37,7 @@ def load_images(images_path):
     timest = time.time()
 
     images = []
+    
     paths = os.listdir(images_path)
 
     for path in paths:
@@ -54,6 +55,8 @@ def load_images(images_path):
 def load_classes(path):
 
     print("loading classes...")
+
+    timest = time.time()
 
     classes=[]
 
