@@ -2,16 +2,15 @@ import torch
 from torch2trt import torch2trt
 from torch2trt import TRTModule
 from torchvision.models.alexnet import alexnet
-from torchvision import datasets, transforms, models
 from torch.autograd import Variable
+from torchvision import transforms
 import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
-import os
-import sys
-import cv2
-import csv
 import time
+import csv
+import sys
+import os
 
 # Create regular pytorch model
 
@@ -60,10 +59,9 @@ def load_classes(path):
 
     classes=[]
 
-    with open(path, 'r') as fd:
-        reader = csv.reader(fd)
-        for row in reader:
-            classes.append(row)
+    file = open(path)
+        for line in file:
+            classes.append(line)
 
     print("found {} classes".format(len(classes)))
     print("classes loaded in {}s".format(round(time.time() - timest, 3)))
@@ -92,9 +90,7 @@ def predict(image, model, trt):
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
-    index = output.data.cpu().numpy().argmax()
-
-    return index
+    return output.data.cpu().numpy().argmax()
 
 
 # Process image
@@ -127,7 +123,7 @@ if __name__ == "__main__":
 
     images = load_images("img/")
 
-    classes = load_classes("classes.csv")
+    classes = load_classes("classes.txt")
 
     print("processing images...")
 
