@@ -92,8 +92,11 @@ if __name__ == "__main__":
 
     trt = False
 
-    if sys.argv[1]:
+    if len(sys.argv) == 2:
         trt = (sys.argv[1] == "trt")
+
+    if sys.argv[1]:
+        
 
     model = load_model()
 
