@@ -60,8 +60,9 @@ def load_classes(path):
     classes=[]
 
     file = open(path)
-        for line in file:
-            classes.append(line)
+    
+    for line in file:
+        classes.append(line)
 
     print("found {} classes".format(len(classes)))
     print("classes loaded in {}s".format(round(time.time() - timest, 3)))
