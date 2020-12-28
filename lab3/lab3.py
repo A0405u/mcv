@@ -10,6 +10,7 @@ import numpy as np
 import os
 import sys
 import cv2
+import csv
 import time
 
 # Create regular pytorch model
@@ -37,8 +38,6 @@ def load_images(images_path):
 
     images = []
     paths = os.listdir(images_path)
-
-    print(paths)
 
     for path in paths:
         image = Image.open(images_path + path)
