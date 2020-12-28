@@ -22,7 +22,7 @@ def load_model():
 
     model = alexnet(pretrained = True).eval().cuda()
 
-    print("model load time {}".format(time.time() - timest))
+    print("model loaded in {}s".format(round(time.time() - timest, 2)))
 
     return model
 
@@ -45,19 +45,28 @@ def load_images(images_path):
         images.append(image)
 
     print("found {} images".format(len(images)))
-    print("images load time {}".format(time.time() - timest))
+    print("images loaded in {}s".format(round(time.time() - timest, 2)))
 
     return images
 
 
 # Read classes
 
-# classes=[]
+def load_classes(path)
 
-# with open('imagenet.txt', 'r') as fd:
-#     reader = csv.reader(fd)
-#     for row in reader:
-#         classes.append(row)
+    print("loading classes...")
+
+    classes=[]
+
+    with open(path, 'r') as fd:
+        reader = csv.reader(fd)
+        for row in reader:
+            classes.append(row)
+
+    print("found {} classes".format(len(classes)))
+    print("classes loaded in {}s".format(round(time.time() - timest, 2)))
+
+    return classes
 
 
 # Transform image
@@ -80,7 +89,9 @@ def predict(image, model, trt):
     timest = time.time()
     #output = model_trt(input)
     output = model(input)
-    print("processing {}".format(time.time()-timest))
+
+    print("processing {}".format(round(time.time() - timest, 2)))
+
     index = output.data.cpu().numpy().argmax()
 
     return index
@@ -95,8 +106,7 @@ def process(image, model, trt):
 
     index = predict(image, model, trt)
 
-    # sub.set_title("class " + str(classes[index]))
-    sub.set_title(index)
+    sub.set_title(classes[index])
     plt.axis('off')
     plt.imshow(image)
     plt.savefig('out/' + str(index) + '.png')
@@ -114,6 +124,8 @@ if __name__ == "__main__":
     model = load_model()
 
     images = load_images("img/")
+
+    classes = load_classes("classes.txt")
 
     print("processing images...")
 
