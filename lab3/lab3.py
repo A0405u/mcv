@@ -65,9 +65,6 @@ def load_classes(path):
         for row in reader:
             classes.append(row)
 
-    print("0: " + str(classes[0]))
-    print("1: " + str(classes[1]))
-
     print("found {} classes".format(len(classes)))
     print("classes loaded in {}s".format(round(time.time() - timest, 3)))
 
