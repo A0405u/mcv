@@ -95,7 +95,8 @@ def process(image, model, trt):
 
     index = predict(image, model, trt)
 
-    sub.set_title("class " + str(classes[index]))
+    # sub.set_title("class " + str(classes[index]))
+    sub.set_title(index)
     plt.axis('off')
     plt.imshow(image)
     plt.savefig('./output/'+str(index)+'.jpg')
