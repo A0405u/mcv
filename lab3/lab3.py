@@ -4,6 +4,7 @@ from torch2trt import TRTModule
 from torchvision.models.alexnet import alexnet
 from torchvision import datasets, transforms, models
 import matplotlib.pyplot as plt
+from PIL import Image
 import numpy as np
 import os
 import sys
@@ -39,7 +40,7 @@ def load_images(images_path):
     print(paths)
 
     for path in paths:
-        image = cv2.imread(images_path + path, cv2.IMREAD_COLOR)
+        image = Image.open(images_path + path)
         images.append(image)
 
     print("found {} images".format(len(images)))
