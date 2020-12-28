@@ -95,9 +95,6 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         trt = (sys.argv[1] == "trt")
 
-    if sys.argv[1]:
-        
-
     model = load_model()
 
     images = load_images("img/")
