@@ -3,6 +3,7 @@ from torch2trt import torch2trt
 from torch2trt import TRTModule
 from torchvision.models.alexnet import alexnet
 from torchvision import datasets, transforms, models
+from torch.autograd import Variable
 import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
