@@ -35,8 +35,18 @@ timest = time.time()
 # model = torch.hub.load('pytorch/vision:v0.8.0', 'wide_resnet101_2', pretrained=True).eval().cuda()
 model = alexnet(pretrained = True).eval().cuda()
 
-print("model loaded in {}s".format(round(time.time() - timest, 2)))
+print("model loaded in {}s".format(round(time.time() - timest, 3)))
 
+
+# Load TRT
+
+if trt:
+    print("converting torch to trt...")
+
+    timest = time.time()
+    model_trt = torch2trt(model, [x])
+
+    print("converted in {}s".format(round(time.time() - timest, 3)))
 
 # Load images
 
@@ -92,8 +102,10 @@ def predict(image):
     input = Variable(image_tensor)
     input = input.to(device)
 
-    #output = model_trt(input)
-    output = model(input)
+    if trt:
+        output = model_trt(input)
+    else:
+        output = model(input)
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
@@ -104,7 +116,7 @@ def predict(image):
 
 def process(image):
 
-    fig = plt.figure(figsize=(6, 6))
+    fig = plt.figure(figsize=(5, 5))
     sub = fig.add_subplot(1,1,1)
 
     index = predict(image)
