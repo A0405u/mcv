@@ -105,11 +105,11 @@ def process(image):
     fig = plt.figure(figsize=(10, 10))
     sub = fig.add_subplot(1,1,1)
 
-    index, probability = predict(image)
+    index = predict(image)
 
     print(classes[index])
 
-    sub.set_title(str(classes[index]) + str(probability))
+    sub.set_title(classes[index])
     plt.axis('off')
     image.thumbnail((320, 240))
     plt.imshow(image)
