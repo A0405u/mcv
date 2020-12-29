@@ -130,7 +130,11 @@ def process(image):
     plt.axis('off')
     image.thumbnail((256, 256))
     plt.imshow(image)
-    plt.savefig('out/' + str(index) + '.png')
+
+    if trt:
+        plt.savefig('out/' + str(index) + 'trt.png')
+    else:
+        plt.savefig('out/' + str(index) + '.png')
     # plt.show()
 
 
