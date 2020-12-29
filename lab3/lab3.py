@@ -104,7 +104,7 @@ def process(image):
     fig = plt.figure(figsize=(10, 10))
     sub = fig.add_subplot(1,1,1)
 
-    index = predict(image, model, trt)
+    index = predict(image)
 
     print("found " + str(index) + "class")
     print(classes[index])
@@ -128,4 +128,4 @@ if __name__ == "__main__":
 
         print("processing {current} of {all}...".format(current = i + 1, all = len(images)))
 
-        process(image, model, trt)
+        process(image)
