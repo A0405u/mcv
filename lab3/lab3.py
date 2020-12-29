@@ -114,7 +114,8 @@ def process(image):
 
     sub.set_title(str(classes[index]) + str(probability))
     plt.axis('off')
-    plt.imshow(image.thumbnail((320, 240)))
+    image.thumbnail((320, 240))
+    plt.imshow(image)
     plt.savefig('out/' + str(index) + '.png')
     # plt.show()
 
