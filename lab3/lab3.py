@@ -1,7 +1,7 @@
 import torch
 from torch2trt import torch2trt
 from torch2trt import TRTModule
-# from torchvision.models.alexnet import alexnet
+from torchvision.models.alexnet import alexnet
 from torch.autograd import Variable
 from torchvision import transforms
 import matplotlib.pyplot as plt
@@ -30,8 +30,8 @@ print("loading model...")
 
 timest = time.time()
 
-model = torch.hub.load('pytorch/vision:v0.8.0', 'wide_resnet101_2', pretrained=True).eval().cuda()
-# model = alexnet(pretrained = True).eval().cuda()
+# model = torch.hub.load('pytorch/vision:v0.8.0', 'wide_resnet101_2', pretrained=True).eval().cuda()
+model = alexnet(pretrained = True).eval().cuda()
 
 print("model loaded in {}s".format(round(time.time() - timest, 2)))
 
@@ -93,9 +93,11 @@ def predict(image):
     #output = model_trt(input)
     output = model(input)
 
+    probability = torch.nn.Softmax(output)
+
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
-    return output.data.cpu().numpy().argmax()
+    return output.data.cpu().numpy().argmax(), torch.topk(probability, 1)
 
 
 # Process image
@@ -105,13 +107,13 @@ def process(image):
     fig = plt.figure(figsize=(10, 10))
     sub = fig.add_subplot(1,1,1)
 
-    index = predict(image)
+    index, probability = predict(image)
 
     print(classes[index])
 
-    sub.set_title(classes[index])
+    sub.set_title(str(classes[index]) + str(probability))
     plt.axis('off')
-    plt.imshow(image)
+    plt.imshow(image.thumbnail((320, 240)))
     plt.savefig('out/' + str(index) + '.png')
     # plt.show()
 
