@@ -104,6 +104,8 @@ def process(image, model, trt):
 
     index = predict(image, model, trt)
 
+    print(index)
+
     sub.set_title(classes[index])
     plt.axis('off')
     plt.imshow(image)
