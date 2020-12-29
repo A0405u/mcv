@@ -92,6 +92,8 @@ def predict(image):
     #output = model_trt(input)
     output = model(input)
 
+    print("output: " + str(output[0]))
+
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
     return output.data.cpu().numpy().argmax()
@@ -106,7 +108,6 @@ def process(image):
 
     index = predict(image)
 
-    print("found " + str(index) + "class")
     print(classes[index])
 
     sub.set_title(classes[index])
