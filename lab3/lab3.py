@@ -97,7 +97,7 @@ def predict(image):
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
-    return output.data.cpu().numpy().argmax(), probability
+    return output.data.cpu().numpy().argmax(), probability[output.data.cpu().numpy().argmax()]
 
 
 # Process image
