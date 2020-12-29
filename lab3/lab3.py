@@ -104,7 +104,8 @@ def process(image, model, trt):
 
     index = predict(image, model, trt)
 
-    print(index)
+    print("found " + str(index) + "class")
+    print(classes[index])
 
     sub.set_title(classes[index])
     plt.axis('off')
@@ -128,6 +129,10 @@ if __name__ == "__main__":
     images = load_images("img/")
 
     classes = load_classes("classes.txt")
+
+    print("class 6: " + str(classes[6]))
+    print("class 7: " + str(classes[7]))
+    print("class 8: " + str(classes[8]))
 
     print("processing images...")
 
