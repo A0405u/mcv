@@ -93,8 +93,6 @@ def predict(image):
     #output = model_trt(input)
     output = model(input)
 
-    print(torch.nn.functional.softmax(output[0], dim=0))
-
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
     return output.data.cpu().numpy().argmax()
