@@ -111,7 +111,7 @@ def process(image):
 
     sub.set_title(classes[index])
     plt.axis('off')
-    image.thumbnail((320, 240))
+    image.thumbnail((128, 128))
     plt.imshow(image)
     plt.savefig('out/' + str(index) + '.png')
     # plt.show()
