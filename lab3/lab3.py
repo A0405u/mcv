@@ -30,7 +30,7 @@ print("loading model...")
 
 timest = time.time()
 
-model = torch.hub.load('pytorch/vision:v0.8.0', 'wide_resnet101_2', pretrained=True)
+model = torch.hub.load('pytorch/vision:v0.8.0', 'wide_resnet101_2', pretrained=True).eval().cuda()
 # model = alexnet(pretrained = True).eval().cuda()
 
 print("model loaded in {}s".format(round(time.time() - timest, 2)))
