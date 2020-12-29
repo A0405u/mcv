@@ -95,9 +95,11 @@ def predict(image):
 
     probability = torch.nn.functional.softmax(output, dim = 1)
 
+    print(probability)
+
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
-    return output.data.cpu().numpy().argmax(), probability[output.data.cpu().numpy().argmax()]
+    return output.data.cpu().numpy().argmax(), probability
 
 
 # Process image
