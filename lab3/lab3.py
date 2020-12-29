@@ -93,8 +93,7 @@ def predict(image):
     #output = model_trt(input)
     output = model(input)
 
-    sm = torch.nn.Softmax()
-    probability = sm(output, dim = 1)
+    probability torch.nn.functional.softmax(output, dim = 1)
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
