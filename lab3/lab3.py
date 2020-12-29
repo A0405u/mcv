@@ -97,7 +97,7 @@ def predict(image):
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
-    return output.data.cpu().numpy().argmax(), torch.topk(probability, 1)
+    return output.data.cpu().numpy().argmax(), probability
 
 
 # Process image
