@@ -41,7 +41,10 @@ print("model loaded in {}s".format(round(time.time() - timest, 3)))
 # Load TRT
 
 if trt:
+
     print("converting torch to trt...")
+
+    x = torch.ones((1, 3, 224, 224)).cuda()
 
     timest = time.time()
     model_trt = torch2trt(model, [x])
