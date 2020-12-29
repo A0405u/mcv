@@ -1,7 +1,8 @@
 import torch
 from torch2trt import torch2trt
 from torch2trt import TRTModule
-from torchvision.models.alexnet import alexnet
+# from torchvision.models.alexnet import alexnet
+from torchvision.models.wide_resnet101_2 import wide_resnet101_2
 from torch.autograd import Variable
 from torchvision import transforms
 import matplotlib.pyplot as plt
@@ -30,7 +31,8 @@ print("loading model...")
 
 timest = time.time()
 
-model = alexnet(pretrained = True).eval().cuda()
+model = wide_resnet101_2(pretrained = True).eval().cuda()
+# model = alexnet(pretrained = True).eval().cuda()
 
 print("model loaded in {}s".format(round(time.time() - timest, 2)))
 
@@ -92,7 +94,7 @@ def predict(image):
     #output = model_trt(input)
     output = model(input)
 
-    print("output: " + str(output[0]))
+    print(torch.nn.functional.softmax(output[0], dim=0))
 
     print("image processed in {}s".format(round(time.time() - timest, 3)))
 
