@@ -12,62 +12,64 @@ import csv
 import sys
 import os
 
+
+IMAGES_PATH = "img/"
+CLASSES_PATH = "classes.txt"
+
+trt = False
+
+
+# Select device
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
 # Create regular pytorch model
 
-def load_model():
+print("loading model...")
 
-    print("loading model...")
+timest = time.time()
 
-    timest = time.time()
+model = alexnet(pretrained = True).eval().cuda()
 
-    model = alexnet(pretrained = True).eval().cuda()
-
-    print("model loaded in {}s".format(round(time.time() - timest, 2)))
-
-    return model
+print("model loaded in {}s".format(round(time.time() - timest, 2)))
 
 
 # Load images
 
-def load_images(images_path):
+print("loading images...")
 
-    print("loading images...")
+timest = time.time()
 
-    timest = time.time()
+images = []
 
-    images = []
+paths = os.listdir(IMAGES_PATH)
 
-    paths = os.listdir(images_path)
+for path in paths:
+    image = Image.open(IMAGES_PATH + path)
+    images.append(image)
 
-    for path in paths:
-        image = Image.open(images_path + path)
-        images.append(image)
-
-    print("found {} images".format(len(images)))
-    print("images loaded in {}s".format(round(time.time() - timest, 3)))
-
-    return images
+print("found {} images".format(len(images)))
+print("images loaded in {}s".format(round(time.time() - timest, 3)))
 
 
 # Read classes
 
-def load_classes(path):
+print("loading classes...")
 
-    print("loading classes...")
+timest = time.time()
 
-    timest = time.time()
+classes=[]
 
-    classes=[]
+file = open(CLASSES_PATH)
 
-    file = open(path)
+for line in file:
+    classes.append(line)
 
-    for line in file:
-        classes.append(line)
+file.close()
 
-    print("found {} classes".format(len(classes)))
-    print("classes loaded in {}s".format(round(time.time() - timest, 3)))
-
-    return classes
+print("found {} classes".format(len(classes)))
+print("classes loaded in {}s".format(round(time.time() - timest, 3)))
 
 
 # Transform image
@@ -77,7 +79,7 @@ image_transforms = transforms.Compose([transforms.Resize(224), transforms.ToTens
 
 # Predict image
 
-def predict(image, model, trt):
+def predict(image):
 
     timest = time.time()
 
@@ -97,7 +99,7 @@ def predict(image, model, trt):
 
 # Process image
 
-def process(image, model, trt):
+def process(image):
 
     fig = plt.figure(figsize=(10, 10))
     sub = fig.add_subplot(1,1,1)
@@ -117,22 +119,8 @@ def process(image, model, trt):
 
 if __name__ == "__main__":
 
-    trt = False
-
     if len(sys.argv) == 2:
         trt = (sys.argv[1] == "trt")
-
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    model = load_model()
-
-    images = load_images("img/")
-
-    classes = load_classes("classes.txt")
-
-    print("class 6: " + str(classes[6]))
-    print("class 7: " + str(classes[7]))
-    print("class 8: " + str(classes[8]))
 
     print("processing images...")
 
