@@ -2,7 +2,6 @@ import torch
 from torch2trt import torch2trt
 from torch2trt import TRTModule
 # from torchvision.models.alexnet import alexnet
-from torchvision.models.wide_resnet101_2 import wide_resnet101_2
 from torch.autograd import Variable
 from torchvision import transforms
 import matplotlib.pyplot as plt
