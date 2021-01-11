@@ -132,9 +132,9 @@ def process(image):
     plt.imshow(image)
 
     if trt:
-        plt.savefig('out/' + str(index) + 'trt.png')
+        plt.savefig('out/' + str(index) + time.time() + 'trt.png')
     else:
-        plt.savefig('out/' + str(index) + '.png')
+        plt.savefig('out/' + str(index) + time.time() + '.png')
     # plt.show()
 
 
