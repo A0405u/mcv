@@ -14,6 +14,7 @@ import os
 
 IMAGES_PATH = "img/"
 CLASSES_PATH = "classes.txt"
+MODEL_TRT_PATH = "alexnet_trt.pt"
 
 trt = False
 
@@ -41,14 +42,24 @@ print("model loaded in {}s".format(round(time.time() - timest, 3)))
 
 if trt:
 
-    print("converting torch to trt...")
+    print("loding trt model...")
+    timesttrt = time.time()
 
-    x = torch.ones((1, 3, 224, 224)).cuda()
+    model = torch.load(MODEL_TRT_PATH)
 
-    timest = time.time()
-    model_trt = torch2trt(model, [x])
+    if not model:
+        print("converting torch to trt...")
 
-    print("converted in {}s".format(round(time.time() - timest, 3)))
+        x = torch.ones((1, 3, 224, 224)).cuda()
+
+        timest = time.time()
+        model_trt = torch2trt(model, [x])
+
+        torch.save(model_trt, MODEL_TRT_PATH)
+
+        print("converted in {}s".format(round(time.time() - timest, 3)))
+        
+    print("loaded in {}s".format(round(time.time() - timesttrt, 3)))
 
 # Load images
 
