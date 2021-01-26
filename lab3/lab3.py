@@ -46,7 +46,6 @@ if trt:
     timesttrt = time.time()
 
     try:
-
         model = torch.load(MODEL_TRT_PATH)
         break
 
