@@ -47,7 +47,6 @@ if trt:
 
     try:
         model = torch.load(MODEL_TRT_PATH)
-        break
 
     except FileNotFoundError:
 
