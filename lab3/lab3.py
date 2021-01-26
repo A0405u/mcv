@@ -45,9 +45,13 @@ if trt:
     print("loding trt model...")
     timesttrt = time.time()
 
-    model = torch.load(MODEL_TRT_PATH)
+    try:
 
-    if not model:
+    model = torch.load(MODEL_TRT_PATH)
+        break
+
+    except FileNotFoundError:
+
         print("converting torch to trt...")
 
         x = torch.ones((1, 3, 224, 224)).cuda()
@@ -58,7 +62,7 @@ if trt:
         torch.save(model_trt, MODEL_TRT_PATH)
 
         print("converted in {}s".format(round(time.time() - timest, 3)))
-        
+
     print("loaded in {}s".format(round(time.time() - timesttrt, 3)))
 
 # Load images
